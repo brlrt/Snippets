@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>CSS Grid test</title>
+	<style>
+.container {
+	display: grid;
+	grid-gap: 5px;
+	/* grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); */
+	grid-template-columns: repeat(auto-fit, 100px);
+}
+
+.box {
+	border: 1px solid black;
+	background: yellow;
+	height: 50px;
+}
+	</style>
+</head>
+<body>
+<div class="container">
+  <div class="box">1</div>
+	<div class="box">2</div>
+	<div class="box">3</div>
+	<div class="box">4</div>
+	<div class="box">5</div>
+	<div class="box">6</div>
+	<div class="box">7</div>
+	<div class="box">8</div>
+	<div class="box">9</div>
+	<div class="box">10</div>
+	<div class="box">11</div>
+	<div class="box">12</div>
+	<div class="box">13</div>
+	<div class="box">14</div>
+	<div class="box">15</div>
+	<div class="box">16</div>
+</div>
+</body>
+</html>

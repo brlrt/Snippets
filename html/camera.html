@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<link rel="shortcut icon" href="/brian.ico" type="image/x-icon" />
+	<link rel="icon" href="/brian.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="/styles.css" />
+	<title>Upload picture</title>
+</head>
+<body>
+	<h1>Upload picture</h1>
+	<p>
+		<input type="file" id="take-picture" accept="image/*">
+	</p>
+	<p><br /></p>
+	<div id="result" style="visibility: hidden">
+		<p>
+			<img src="about:blank" alt="" id="show-picture" />
+		</p>
+	</div>
+	<p id="error"></p>
+	<script>
+var takePicture = document.getElementById('take-picture');
+var showPicture = document.getElementById('show-picture');
+
+takePicture.onchange = function (event) {
+	var files = event.target.files, file;
+	if (!files || files.length < 1) {
+		return;
+	}
+
+	file = files[0];
+	try {
+		var url = window.URL || window.webkitURL;
+		var imgUrl = URL.createObjectURL(file);
+		showPicture.src = imgURL;
+		showPicture.onload = function() {
+			URL.revokeObjectURL(imgURL);  
+			showPicture.style.visibility = 'visible';
+		};
+	} catch (e) {
+		try {
+			var fileReader = new FileReader();
+			fileReader.onload = function (event) {
+				showPicture.src = event.target.result;
+				showPicture.style.visibility = 'visible';
+			};
+			fileReader.readAsDataURL(file);
+		} catch (e) {
+			var error = document.querySelector("#error");
+			if (error) {
+				error.innerHTML = "Neither createObjectURL or FileReader are supported";
+			}
+		}
+	}
+};
+	</script>
+</body>
+</html>

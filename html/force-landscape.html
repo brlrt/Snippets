@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Force landscape</title>
+	<style>
+body {
+	font-size: 44px;
+	background-color: black;
+	color: white;
+}
+
+#warning-message { display: none; }
+
+@media only screen and (orientation:portrait) {
+	#wrapper { display:none; }
+	#warning-message { display:block; }
+}
+
+@media only screen and (orientation:landscape) {
+	#warning-message { display:none; }
+}
+
+#warning-message p {
+	font-size: 40px;
+	color: #ddd;
+	text-align: center;
+}
+	</style>
+</head>
+<body>
+	<div id="wrapper">
+		<p>Test - shown in landscape</p>
+	</div>
+	<div id="warning-message" style="margin: 0 auto; width: 626px;">
+		<p><br /></p>
+		<p>Turn to landscape!</p>
+		<p><br /></p>
+		<img src="rotate.jpg" width="626" height="626" alt="Rotate, please!" />
+	</div>
+</body>
+</html>

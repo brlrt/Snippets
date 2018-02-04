@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Startside</title>
+	<style>
+html { height: 100%; }
+
+body {
+	font-size: 14px;
+	font-family: tahoma, geneva, sans-serif;
+	height: 100%;
+}
+
+a {
+	text-decoration: none;
+	margin: 0.5em 1.5em 0.5em 0;
+	color: #112244;
+}
+
+.hotpick {
+	padding: 1em;
+	width: 85%;
+	margin: 1em auto;
+	text-align: center;
+	font-weight: bold;
+}
+
+button {
+	margin-left: 1em;
+	font-size: 16px;
+}
+
+#q { font-size: 16px; }
+
+.menu {
+	margin: 5em auto;
+	text-align: center;
+}
+
+#wise {
+	font-size: 10px;
+	display: hidden;
+	background-color: #ffa;
+	border: 1px dotted #660;
+	width: 30%;
+	margin: 0 auto;
+	margin: 4em auto 0 auto;
+	padding: 1em 1em 2em 1em;
+}
+	</style>
+	<script>
+function _search(url) {
+	var value = document.getElementById('q').value;
+	var location = url.replace('%s', value);
+	window.location = location;
+}
+
+function lyricsfreak() {
+	_search('http://www.lyricsfreak.com/search.php?a=search&type=song&q=%s');
+}
+
+function translatetoda() {
+	_search('https://translate.google.com/#en|da|%s');
+}
+
+function translatetoen() {
+	_search('https://translate.google.com/#da|en|%s');
+}
+
+function wikien() {
+	_search('http://en.wikipedia.org/wiki/%s');
+}
+
+function wikida() {
+	_search('http://da.wikipedia.org/wiki/%s');
+}
+
+function youtube() {
+	_search('https://www.youtube.com/results?search_query=%s');
+}
+
+function raven() {
+	var value = document.getElementById('q').value;
+	if (!value.match(/\S/)) {
+		window.location = 'https://groups.google.com/forum/#!forum/ravendb';
+		return false;
+	}
+
+       _search('https://groups.google.com/forum/#!searchin/ravendb/%s');
+}
+
+function createCORSRequest(method, url) {
+	if (typeof XDomainRequest != "undefined") {
+		xhr = new XDomainRequest();
+		xhr.open(method, url);
+		return xhr;
+	} 
+
+	var xhr = new XMLHttpRequest();
+	xhr.open(method, url, true);
+	return xhr;
+}
+
+function wise()
+{
+	var xhr = createCORSRequest('GET', "https://leah.schau.dk/wise/get.php");
+	if (!xhr) {
+		return;
+	}
+
+	xhr.onload = function() {
+		var wise = document.getElementById('wise');
+		wise.innerHTML = xhr.responseText;
+		wise.style.display = 'block';
+	};
+
+	xhr.send();
+}
+	</script>
+</head>
+<body onload="document.getElementById('q').focus(); wise()">
+<p class="menu">
+	<input type="text" name="q" id="q" onkeypress="if (event.keyCode == 13) { document.getElementById('defaultButton').click() }" />
+	<button onclick="wikien()">Wikipedia EN</button>
+	<button onclick="wikida()">Wikipedia DA</button>
+	<button onclick="lyricsfreak()">LyricsFreak</button>
+	<button onclick="youtube()">Youtube</button>
+	<button onclick="translatetoda()">En &rarr; Da</button>
+	<button onclick="translatetoen()">Da &rarr; En</button>
+	<button onclick="raven()">Raven</button>
+</p>
+<div class="hotpick">
+	<a href="...">Link 1</a>
+	<a href="...">Link 2</a>
+</div>
+
+<div class="hotpick">
+	<a href="...">Link 3</a>
+	<a href="...">Link 4</a>
+</div>
+
+<div id="wise"></div>
+</body>
+</html>

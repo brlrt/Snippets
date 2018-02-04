@@ -1,0 +1,1 @@
+char *xstrcat(char *sep, ...);
